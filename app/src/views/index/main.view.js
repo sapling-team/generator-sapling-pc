@@ -12,6 +12,9 @@ var View = BaseView.extend({
     rawLoader:function(){
         return indexTemp;
     },
+    context:function(args){
+
+    },
     beforeMount:function(){
         //初始化一些自定义属性
         this.indexParameter = {

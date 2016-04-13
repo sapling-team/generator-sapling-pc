@@ -10,18 +10,19 @@ var env = Config.env[Config.scheme];
 var Model = BaseModel.extend({
     url:'{{url_prefix}}/index?id={{id}}',
     //headers:{},
+    //defaults:function(){},
     beforeEmit:function(options){
         if(/^\{{0,2}(url_prefix)\}{0,2}/.test(this.url)){
             this.url = this.url.replace('{{url_prefix}}',env['url_prefix']);
         }
     }
     //validate:function(atts){
-    //
+    //  // 处理提交信息的验证
     //},
     //formatter:function(response){
     //   return response
     //},
-    //defaults:function(){}
+
 });
 var shared = null;
 Model.sharedInstanceModel = function(){
