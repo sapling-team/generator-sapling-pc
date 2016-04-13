@@ -7,6 +7,7 @@
     "test": "mocha --colors test/*.spec.js",
     "start": "gulp server",
     "dev": "webpack --watch --colors --config bin/webpack.dev.config.js",
+    "build": "gulp build",
     "product": "webpack --colors --config bin/webpack.product.config.js --optimize-minimize"
   },
   "repository": {
@@ -34,10 +35,12 @@
     "file-loader": "^0.8.5",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.15.0",
     "jade": "^1.11.0",
     "jade-loader": "^0.8.0",
     "jquery": "^1.12.3",
+    "lodash": "^4.10.0",
     "mocha": "^2.4.5",
     "node-sass": "^3.4.2",
     "now-extend-modules": "0.0.1",

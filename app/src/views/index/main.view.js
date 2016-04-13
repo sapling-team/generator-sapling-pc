@@ -6,9 +6,10 @@ var base = require('base-extend-backbone');
 var BaseView = base.View;
 var IndexModel = require('../../models/index/main.model');
 var indexTemp = require('../../template/index/main.html');
+var imgSrc = require('../../../images/change.gif');
 
 var View = BaseView.extend({
-    el:'#yytContainer',
+    el:'#indexContainer',
     rawLoader:function(){
         return indexTemp;
     },
@@ -23,9 +24,10 @@ var View = BaseView.extend({
     },
     afterMount:function(){
         //获取DOM Node
-        this.img = this.findDOMNode('img');
+        this.imgContainer = this.findDOMNode('#imgContainer');
     },
     ready:function(){
+        this.imgContainer.html('<img src="'+imgSrc+'"/>');
         //初始化Model
         this.indexModel = new IndexModel();
         this.indexModel.setChangeURL(this.indexParameter);

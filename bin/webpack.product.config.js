@@ -7,10 +7,11 @@ var path = require('path');
 var fs = require('fs');
 var containerPath = path.resolve('./');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractSASS = new ExtractTextPlugin('css/[name]-[hash].css');
+var extractSASS = new ExtractTextPlugin('[name]-[hash].css');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var getEntry = require('./getEntry');
 var rmdir = require('./rmdir');
+var alias = require('./alias');
 rmdir('./app/www/');
 
 //配置入口文件
@@ -18,14 +19,6 @@ var entrys = getEntry('./app/src/*.js');
 
 //添加插件
 var plugins = [];
-
-process.env.NODE_ENV = 'product';
-//注入环境变量
-plugins.push(new webpack.DefinePlugin({
-    'process.env':{
-        'NODE_ENV':JSON.stringify(process.env.NODE_ENV)
-    }
-}));
 
 //切割css文件
 plugins.push(extractSASS);
@@ -37,6 +30,7 @@ plugins.push(new webpack.optimize.CommonsChunkPlugin('common','common-[hash].js'
 var pages = getEntry('./app/web/*.jade');
 for(var chunkname in pages){
     var conf = {
+        cdn:false,
         filename:chunkname+'.html',
         template:pages[chunkname],
         inject:true,
@@ -49,6 +43,22 @@ for(var chunkname in pages){
     }
     plugins.push(new HtmlWebpackPlugin(conf));
 }
+
+//生产环境优化
+
+plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress:{
+        warnings: false
+    }
+}));
+
+process.env.NODE_ENV = 'product';
+//注入环境变量
+plugins.push(new webpack.DefinePlugin({
+    'process.env':{
+        'NODE_ENV':JSON.stringify(process.env.NODE_ENV)
+    }
+}));
 
 //配置webpack
 var config = {
@@ -72,31 +82,29 @@ var config = {
                 exclude:/(node_modules)/
             },
             {
-                test:/\.sass$/i,
+                test:/\.scss$/i,
                 loader:extractSASS.extract(['css','sass'])
             },
             {
-                test:/\.(png|jpg)$/,
-                loader:'url-loader?limit=8192'
-            },
-            {
-                test:/.jade$/,
+                test:/.jade$/i,
                 loader:'jade-loader',
                 exclude:/(node_modules)/
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
             }
         ]
     },
     plugins:plugins,
     resolve:{
-        alias:{ //别名
-            'config':path.resolve(containerPath,'./app/src/lib/config.js')
-        }
+        alias:alias,
+        extensions: ['', '.js', '.css', '.scss', '.jade', '.png', '.jpg']
     },
     externals:{ //导出外部对象
         jquery:'window.jQuery',
         backbone:'window.Backbone',
-        underscore:'window._',
-        tplEng:'window.artTemplate'
+        underscore:'window._'
     }
 };
 module.exports = config;

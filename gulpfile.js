@@ -5,7 +5,7 @@ var browserSync = browser.create();
 
 gulp.task('server',function(){
     browserSync.init({
-        server:'./app/',
+        server:'./app',
         port:3000
     });
     gulp.watch('./app/**/*.*',function(file){
@@ -14,4 +14,23 @@ gulp.task('server',function(){
     })
 });
 
+var gutil = require('gulp-util');
+gulp.task('build',['webpack'],function(){
+    return gulp.src([
+        'app/link/*.js',
+        'app/link/**/*.js',
+    ],{base:'app/'})
+        .pipe(gulp.dest('app/www/'))
+});
 
+gulp.task('webpack',function(callback){
+    var webpack = require('webpack');
+    var productConfig = require('./bin/webpack.product.config.js');
+    webpack(productConfig,function(err,stats){
+        if(err){
+            throw new gutil.PluginError('webpack',err);
+        }
+        gutil.log('[webpack]',stats.toString());
+        callback();
+    });
+});

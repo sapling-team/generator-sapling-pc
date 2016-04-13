@@ -6,5 +6,7 @@ if htmlWebpackPlugin.options.cdn
     - src = 'http://127.0.0.1:3000/www/link/'
 else
     - src = '/link/'
+// build:js ./
 each val in map
     script(type="text/javascript",src=src+val)
+// endbuild

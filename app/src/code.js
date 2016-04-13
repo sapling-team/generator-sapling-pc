@@ -4,6 +4,7 @@
 
 var $ = require('jquery');
 $(function(){
-
-    require('../stylesheets/code.sass');
+    var MainView = require('./views/code/main.view');
+    var mainView = new MainView();
+    require('../stylesheets/code.scss');
 });

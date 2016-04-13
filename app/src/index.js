@@ -5,5 +5,5 @@ var $ = require('jquery');
 $(function(){
     var MainView = require('./views/index/main.view');
     var mainView =  new MainView();
-    require('../stylesheets/index.sass');
+    require('../stylesheets/index.scss');
 })

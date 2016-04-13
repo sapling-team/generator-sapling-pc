@@ -21,13 +21,20 @@ function rmdir(dirPath){
 }
 
 function collection(url,dirs){
-    var stat = fs.statSync(url);
-    if(stat.isDirectory()){
-        dirs.unshift(url);
-        recursion(url,dirs);
-    }else{
-        if(stat.isFile()){
-            fs.unlinkSync(url);
+    var stat;
+    try {
+        stat = fs.statSync(url);
+    }catch(e){
+        console.log(e)
+    };
+    if(stat){
+        if(stat.isDirectory()){
+            dirs.unshift(url);
+            recursion(url,dirs);
+        }else{
+            if(stat.isFile()){
+                fs.unlinkSync(url);
+            }
         }
     }
 }
