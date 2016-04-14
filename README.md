@@ -37,7 +37,7 @@ we can using npm scripts `start` `dev` `product` `test`
 - npm start 启动一个服务器
 - npm test 启动mocha进行自动化测试
 - npm run dev 启动webpack dev构建环境
-- npm run build 启动gulp构建可发布的资源
+- npm run product 启动webpack product + gulp build构建可发布的资源
 
 ## tools.js
 
@@ -48,6 +48,15 @@ we can using npm scripts `start` `dev` `product` `test`
 ## include
 
 在编译期来决定最终呈现什么样的HTML，使用jade的`include`特性来组合你的HTML。
+
+## image
+
+写在HTML中的image推荐大家使用`js`的方式来处理：
+
+```JavaScript
+var imgSrc = require('../../../images/change.gif');
+this.imgContainer.html('<img src="'+imgSrc+'"/>');
+```
 
 ## 模块化
 

@@ -7,8 +7,8 @@
     "test": "mocha --colors test/*.spec.js",
     "start": "gulp server",
     "dev": "webpack --watch --colors --config bin/webpack.dev.config.js",
-    "build": "gulp build",
-    "product": "webpack --colors --config bin/webpack.product.config.js --optimize-minimize"
+    "product": "gulp build",
+    "preproduct":"webpack --colors --config bin/webpack.product.config.js --optimize-minimize"
   },
   "repository": {
     "type": "git",

@@ -15,7 +15,7 @@ gulp.task('server',function(){
 });
 
 var gutil = require('gulp-util');
-gulp.task('build',['webpack'],function(){
+gulp.task('build',function(){
     return gulp.src([
         'app/link/*.js',
         'app/link/**/*.js',
