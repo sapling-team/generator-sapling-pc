@@ -6,13 +6,20 @@ var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
 var containerPath = path.resolve('./');
+var compileConfig = require('../app/compile.config.json');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractSASS = new ExtractTextPlugin('[name].css');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var getEntry = require('./getEntry');
 var rmdir = require('./rmdir');
 var alias = require('./alias');
+var compile = require('./compile');
+
+//清理www目录
 rmdir('./app/www/');
+
+//对complie配置文件进行处理
+compileConfig = compile(compileConfig);
 
 //配置入口文件
 
@@ -20,20 +27,6 @@ var entrys = getEntry('./app/src/*.js');
 
 //添加插件
 var plugins = [];
-
-//if(process.env.NODE_ENV === 'product'){
-//    //注入环境变量
-//    //plugins.push(new webpack.DefinePlugin({
-//    //    'process.env':{
-//    //        'NODE_ENV':JSON.stringify(process.env.NODE_ENV)
-//    //    }
-//    //}));
-//    /*
-//    * 非windows用户提醒:建议使用环境变量的方式,将上方的注释去掉,在npm scripts中输入如下:
-//    *
-//    * NODE_ENV=product webpack --colors --config bin/webpack.config.js --optimize-minimize
-//    * */
-//}
 
 //切割css文件
 plugins.push(extractSASS);
@@ -45,7 +38,6 @@ plugins.push(new webpack.optimize.CommonsChunkPlugin('common','common.js'));
 var pages = getEntry('./app/web/*.jade');
 for(var chunkname in pages){
     var conf = {
-        cdn:false,
         filename:chunkname+'.html',
         template:pages[chunkname],
         inject:true,
@@ -54,7 +46,13 @@ for(var chunkname in pages){
             collapseWhitespace: false
         },
         chunks:['common',chunkname],
-        hash:true
+        hash:true,
+        complieConfig:compileConfig
+    }
+    var titleC = compileConfig.title || {};
+    var title = titleC[chunkname];
+    if(title){
+        conf.title = title;
     }
     plugins.push(new HtmlWebpackPlugin(conf));
 }

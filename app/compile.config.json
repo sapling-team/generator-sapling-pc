@@ -1,0 +1,13 @@
+{
+  "random":true,
+  "script":[
+      "jquery/dist/jquery.min.js",
+      "underscore/underscore-min.js",
+      "backbone/backbone-min.js"
+  ],
+  "style":[],
+  "title":{
+    "index":"webpack index",
+    "code":"webpack code"
+  }
+}

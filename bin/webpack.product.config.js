@@ -6,13 +6,21 @@ var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
 var containerPath = path.resolve('./');
+var compileConfig = require('../app/compile.config.json');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractSASS = new ExtractTextPlugin('[name]-[hash].css');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var getEntry = require('./getEntry');
 var rmdir = require('./rmdir');
 var alias = require('./alias');
+var compile = require('./compile');
+
+//清除www目录
 rmdir('./app/www/');
+
+//对complie配置文件进行处理
+compileConfig.cdn = compileConfig.cdn || 'http://127.0.0.1:3000/';
+compileConfig = compile(compileConfig);
 
 //配置入口文件
 var entrys = getEntry('./app/src/*.js');
@@ -30,7 +38,6 @@ plugins.push(new webpack.optimize.CommonsChunkPlugin('common','common-[hash].js'
 var pages = getEntry('./app/web/*.jade');
 for(var chunkname in pages){
     var conf = {
-        cdn:false,
         filename:chunkname+'.html',
         template:pages[chunkname],
         inject:true,
@@ -39,18 +46,24 @@ for(var chunkname in pages){
             collapseWhitespace: false
         },
         chunks:['common',chunkname],
-        hash:false
+        hash:false,
+        complieConfig:compileConfig
+    }
+    var titleC = compileConfig.title || {};
+    var title = titleC[chunkname];
+    if(title){
+        conf.title = title;
     }
     plugins.push(new HtmlWebpackPlugin(conf));
 }
 
 //生产环境优化
 
-plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress:{
-        warnings: false
-    }
-}));
+//plugins.push(new webpack.optimize.UglifyJsPlugin({
+//    compress:{
+//        warnings: false
+//    }
+//}));
 
 process.env.NODE_ENV = 'product';
 //注入环境变量

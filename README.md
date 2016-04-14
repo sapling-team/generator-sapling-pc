@@ -58,6 +58,26 @@ var imgSrc = require('../../../images/change.gif');
 this.imgContainer.html('<img src="'+imgSrc+'"/>');
 ```
 
+## compile.config
+
+配置你的config文件,这个文件主要针对不是`webpack`打包而是用`script`方式创建的优化
+
+```JavaScript
+{
+  "random":true,
+  "script":[
+      "jquery/dist/jquery.min.js",
+      "underscore/underscore-min.js",
+      "backbone/backbone-min.js"
+  ],
+  "style":[],
+  "title":{
+    "index":"webpack index",
+    "code":"webpack code"
+  }
+}
+```
+
 ## 模块化
 
 js使用commonjs模块化规范来组织
