@@ -4,10 +4,10 @@
       "jquery/dist/jquery.min.js",
       "underscore/underscore-min.js",
       "backbone/backbone-min.js",
-      "assets/js/amazeui.min.js"
+      "amazeui/dist/js/amazeui.min.js"
   ],
   "style":[
-    "assets/css/amazeui.min.css"
+    "amazeui/dist/css/amazeui.min.css"
   ],
   "title":{
     "index":"webpack index",

@@ -7,8 +7,8 @@ var containerPath = path.resolve('./');
 
 //	别名
 var alias = { 
-  config:path.resolve(containerPath,'./app/src/lib/config.js'),
-  tplEng:path.resolve(containerPath,'./app/link/template')
+  config:path.resolve(containerPath,'./app/src/lib/config'),
+  tplEng:path.resolve(containerPath,'./app/link/artTemplate/dist/template')
 };
 
 module.exports = alias;

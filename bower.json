@@ -21,6 +21,7 @@
     "jquery": "1.12.3",
     "underscore": "^1.8.3",
     "backbone": "^1.3.3",
-    "amazeui": "^2.6.1"
+    "amazeui": "^2.6.1",
+    "artTemplate": "^3.0.1"
   }
 }
