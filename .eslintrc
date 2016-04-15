@@ -1,0 +1,11 @@
+{
+	"extends": "airbnb/legacy",
+	"rules": {
+    "semi": 2
+  },
+  "env":{
+  	"jquery":true,
+  	"commonjs":true,
+  	"browser":true
+  }
+}

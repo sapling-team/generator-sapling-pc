@@ -1,5 +1,7 @@
 ## generate-sapling-pc
 
+[![Build Status](https://travis-ci.org/sapling-team/generator-sapling-pc.svg?branch=master)](https://travis-ci.org/sapling-team/generator-sapling-pc)
+
 音悦台PC端项目脚手架，项目所使用的工具如下：
 
 > Node version v4.4.1
@@ -85,6 +87,12 @@ js使用commonjs模块化规范来组织
 ## CDN
 
 使用`npm run build`时可以在`webpack.product.config.js`文件中找到`publicPath`替换成你使用的CDN地址。
+
+## eslint
+
+在`commit`阶段会做一次review，如果不通过`eslint`将不会触发git commit hook来提交源代码，我们使用了[https://github.com/typicode/husky](https://github.com/typicode/husky)这个工具帮助我们做了`shell`脚本。
+
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript/tree/master/es5)
 
 ## 基础库
 
