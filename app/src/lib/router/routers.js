@@ -15,7 +15,7 @@ var AppRouter = BaseRouter.extend({
     this.addLifeCycleHelper('index', IndexView);
   },
   indexRouterId: function (id) {
-    this.addLifeCycleHelper('index-'+id, IndexView, id);
+    this.addLifeCycleHelper('index-' + id, IndexView, id);
   }
 });
 
