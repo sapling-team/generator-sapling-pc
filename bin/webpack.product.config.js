@@ -107,7 +107,7 @@ var config = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
+        loader: 'url-loader?limit=8192&name=images/[name]-[hash].[ext]'
       }
     ]
   },
