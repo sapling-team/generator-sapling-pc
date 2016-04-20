@@ -4,7 +4,7 @@ var base = require('base-extend-backbone');
 var BaseView = base.View;
 var IndexModel = require('../../models/index/main.model');
 var indexTemp = require('../../template/index/main.html');
-var imgSrc = require('../../../images/change.gif');
+var imgSrc = require('../../../images/change.png');
 
 var View = BaseView.extend({
   el: '#indexContainer',
