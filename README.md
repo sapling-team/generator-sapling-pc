@@ -20,13 +20,13 @@ download project
 remove git `origin` and add your project `new origin`
 
 	git remote remove origin
-	
+
 	git remote add origin git@github.com:sapling-team/generator-sapling-pc.git
-	
+
 	git pull
 
 install global bower
-    
+
     npm install -g bower
 
 execute npm install
@@ -102,7 +102,7 @@ js使用commonjs模块化规范来组织
 - base-extend-backbone
 - now-extend-modules
 
-阅读[base-extend-backbone API](https://github.com/sapling-team/base-extend-backbone)和[now-extend-modules](https://github.com/sapling-team/now-extend-modules)来熟悉如何使用base扩展和其他通用的函数库。
+阅读[base-extend-backbone](https://github.com/sapling-team/base-extend-backbone)和[auxiliary-additions](https://github.com/sapling-team/auxiliary-additions)来熟悉如何使用base扩展和其他通用的函数库。
 
 ## 第三方库处理
 
